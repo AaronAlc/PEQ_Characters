@@ -1,0 +1,13 @@
+{% if character_list %}
+    <ul>
+    {% for character in character_list %}
+    <li><a href="/characters/{{ character.name }}/">{{ character.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No characters at the moment.</p>
+{% endif %}
+
+<form action="" method="POST"> {% csrf_token %}
+    <input type="submit" class="btn" value="Update" name="Update_DB">
+</form>

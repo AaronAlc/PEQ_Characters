@@ -1,0 +1,27 @@
+<html>
+    </body>
+        {% if character %}
+            <h1> {{ character.name }} </h1>
+            <h1>Armor Equipped</h1>
+            {% if eas %}
+                <table border="1">
+                    <tr>
+                        <th>Armor Name</th>
+                        <th>HP</th>
+                        <th>Mana</th>
+                    </tr>
+                {% for e in eas %}
+                    <tr>
+                    <td> {{ e.armor }} </td>
+                    <td> {{ e.armor.hp_points }} </td>
+                    <td>{{ e.armor.mana_points }} </td>
+                    </tr>
+                {% endfor %}
+                </table>
+
+            {% endif %}
+        {% else %}
+            <p>No characters at the moment.</p>
+        {% endif %}
+    </body>
+</html>
