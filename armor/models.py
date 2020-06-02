@@ -3,8 +3,7 @@ from django.db import models
 from django.apps import apps
 
 # Create your models here.
-class Armor(models.Model):
-    armor_id=models.AutoField(primary_key=True)
+class ItemAttributes(models.Model):
     name=models.CharField(max_length=100)
     armor_class=models.IntegerField(default=0)
     strength=models.IntegerField(default=0)
@@ -20,6 +19,46 @@ class Armor(models.Model):
     spell_shielding=models.IntegerField(default=0)
     shieldling=models.IntegerField(default=0)
     focus_effect = models.CharField(max_length=100, default=None, null=True, blank=True)
+
+    class Meta:
+        abstract=True
+
+class Augmentation(ItemAttributes):
+    augmentation_id=models.AutoField(primary_key=True)
+
+    ANGUISH_AUG_NAMES = [
+        "Rune of Futile Resolutions",
+        "Stone of Horrid Transformation",
+        "Rune of Grim Portents",
+        "Rune of Living Lightning",
+        "Gem of Unnatural Regrowth",
+        "Stone of Planar Protection",
+        "Rune of Astral Celerity",
+        "Abhorrent Brimstone of Charring",
+        "Orb of Forbidden Laughter",
+        "Petrified Girplan Heart",
+        "Kyv Eye of Marksmanship",
+    ]
+
+    def __str__(self):
+        return self.name
+
+class EquipAugmentation1(models.Model):
+    equip_aug_slot1 = models.AutoField(primary_key=True)
+    aug = models.ForeignKey(Augmentation, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.aug.name
+
+class EquipAugmentation2(models.Model):
+    equip_aug_slot2 = models.AutoField(primary_key=True)
+    aug = models.ForeignKey(Augmentation, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.aug.name
+
+
+class Armor(ItemAttributes):
+    armor_id=models.AutoField(primary_key=True)
+
     def __str__(self):
         return self.name
 
@@ -52,7 +91,12 @@ class EquipArmorSlot(models.Model):
     )
     character = models.ForeignKey('characters.Character', on_delete=models.CASCADE)
     armor = models.ForeignKey('armor.Armor', on_delete=models.CASCADE)
-    current_equip_slot = models.CharField(max_length=6, choices=EQUIP_SLOTS, default=None, blank=True, null=True)
+    current_equip_slot = models.CharField(max_length=6, choices=EQUIP_SLOTS, default=None, null=True)
+    aug1 = models.ForeignKey(EquipAugmentation1, on_delete=models.CASCADE, default=None, null=True)
+    aug2 = models.ForeignKey(EquipAugmentation2, on_delete=models.CASCADE, default=None, null=True)
+
+    def slot_verbose(self):
+        return dict(EquipArmorSlot.EQUIP_SLOTS)[self.current_equip_slot]
 
 class WearableArmorSlot(models.Model):
     wear_slot_id = models.AutoField(primary_key=True)
@@ -76,7 +120,6 @@ class WearableArmorSlot(models.Model):
         ('Feet', 'Feet'),
         ('Waist', 'Waist'),
         ('Ammo', 'Ammo'),
-        ('Powersource', 'Powersource'),
     )
-    armor = models.ForeignKey('armor.Armor', on_delete=models.CASCADE)
+    armor = models.ForeignKey('armor.Armor', null=True, blank=True, on_delete=models.CASCADE, default=None)
     wearable_armor_slot = models.CharField(max_length=15, choices=WEARABLE_SLOTS, default=None, blank=True)
