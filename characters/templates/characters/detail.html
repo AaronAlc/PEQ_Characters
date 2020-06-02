@@ -2,23 +2,40 @@
     </body>
         {% if character %}
             <h1> {{ character.name }} </h1>
-            <h1>Armor Equipped</h1>
             {% if eas %}
+                <h1>Armor Equipped</h1>
                 <table border="1">
                     <tr>
                         <th>Armor Name</th>
                         <th>HP</th>
                         <th>Mana</th>
+                        <th>Equip Slot</th>
+                        <th>Aug1</th>
+                        <th>Aug2</th>
                     </tr>
                 {% for e in eas %}
                     <tr>
                     <td> {{ e.armor }} </td>
                     <td> {{ e.armor.hp_points }} </td>
                     <td>{{ e.armor.mana_points }} </td>
+                    <td>{{ e.slot_verbose }} </td>
+                    <td>{{ e.aug1 }} </td>
+                    <td>{{ e.aug2 }} </td>
                     </tr>
                 {% endfor %}
                 </table>
-
+                {% if missingAnguishAugs %}
+                <table border=1">
+                    <tr>
+                        <th>Missing Aug List</th>
+                    </tr>
+                    {% for mAA in missingAnguishAugs %}
+                    <tr>
+                        <td> {{ mAA }} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
             {% endif %}
         {% else %}
             <p>No characters at the moment.</p>
