@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('characters/', include('characters.urls')),
     path('admin/', admin.site.urls),
+    path('character_comparison/', include('character_comparison.urls')),
 ]

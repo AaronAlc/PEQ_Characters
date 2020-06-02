@@ -25,7 +25,7 @@ SECRET_KEY = '&vd#pepf#4jdyvgspgwj)lobv-y-eg^wn505^r4*tn*c!vsbm-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.119']
+ALLOWED_HOSTS = ['192.168.0.105', '67.11.153.52']
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['192.168.1.119']
 INSTALLED_APPS = [
     'characters.apps.CharactersConfig',
     'armor.apps.ArmorConfig',
+    'epic_tracker',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'char_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'character_comparison', 'templates', 'character_comparison'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
