@@ -1,0 +1,28 @@
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'search' %}">Search</a>
+{% if eas %}
+    <h1>Armor List by CHARACTERS</h1>
+    <table border="1">
+        <tr>
+            <th>Character Name</th>
+            <th>Class</th>
+            <th>Armor Name</th>
+            <th>HP</th>
+            <th>Mana</th>
+            <th>Equip Slot</th>
+            <th>Aug1</th>
+            <th>Aug2</th>
+            {% for e in eas %}
+                <tr>
+                <td> {{ e.character }} </td>
+                <td> {{ e.character.char_class }} </td>
+                <td> {{ e.armor }} </td>
+                <td> {{ e.armor.hp_points }} </td>
+                <td>{{ e.armor.mana_points }} </td>
+                <td>{{ e.slot_verbose }} </td>
+                <td>{{ e.aug1 }} </td>
+                <td>{{ e.aug2 }} </td>
+                </tr>
+            {% endfor %}
+    </table>
+{% endif %}
