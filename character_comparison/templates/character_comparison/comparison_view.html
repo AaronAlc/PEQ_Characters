@@ -1,4 +1,6 @@
-<html>
+{% extends 'header_footer.html' %}
+
+{% block content %}
 
     <form method="get">
         {{ form.non_field_errors }}
@@ -34,6 +36,7 @@
         <input type='submit' value='Filter'>
     </form>
 
-{% block content %}
+{% block character_detail %}
 {% endblock %}
-</html>
+
+{% endblock %}

@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')),
     path('characters/', include('characters.urls')),
     path('admin/', admin.site.urls),
     path('character_comparison/', include('character_comparison.urls')),
+    path('epic_tracker/', include('epic_tracker.urls')),
 ]

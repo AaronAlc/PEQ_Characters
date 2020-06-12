@@ -1,10 +1,12 @@
 
 
+{% extends 'header_footer.html' %}
+
+{% block content %}
 <form action="" method="POST"> {% csrf_token %}
     <input type="submit" class="btn" value="Update" name="Update_DB">
 </form>
-<li><a class='characters' href="/characters/">Characters</a></li>
-<li><a class='char_compare' href="/character_comparison/">Character Armor Comparison</a></li>
+
 {% if character_list %}
     <table border="1">
     {% for character in character_list %}
@@ -21,3 +23,4 @@
     <p>No characters at the moment.</p>
 {% endif %}
 
+{% endblock %}
