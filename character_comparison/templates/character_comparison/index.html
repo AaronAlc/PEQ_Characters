@@ -1,5 +1,6 @@
-<a href="{% url 'index' %}">Home</a>
-<a href="{% url 'search' %}">Search</a>
+{% extends 'header_footer.html' %}
+
+{% block content %}
 {% if eas %}
     <h1>Armor List by CHARACTERS</h1>
     <table border="1">
@@ -14,7 +15,7 @@
             <th>Aug2</th>
             {% for e in eas %}
                 <tr>
-                <td> {{ e.character }} </td>
+                <td> <a href={% url 'detail' name=e.character %}> {{ e.character }} </a></td>
                 <td> {{ e.character.char_class }} </td>
                 <td> {{ e.armor }} </td>
                 <td> {{ e.armor.hp_points }} </td>
@@ -26,3 +27,5 @@
             {% endfor %}
     </table>
 {% endif %}
+
+{% endblock %}

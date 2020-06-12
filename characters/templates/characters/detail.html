@@ -1,5 +1,6 @@
-<html>
-    </body>
+{% extends 'header_footer.html' %}
+
+{% block content %}
         {% if character %}
             <h1> {{ character.name }} </h1>
             {% if eas %}
@@ -40,5 +41,4 @@
         {% else %}
             <p>No characters at the moment.</p>
         {% endif %}
-    </body>
-</html>
+{% endblock %}
