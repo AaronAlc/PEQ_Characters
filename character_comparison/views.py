@@ -5,16 +5,16 @@ from django.db.models import Q
 from character_comparison.forms import CharacterGearComparison
 
 #Create your views here.
-def index(request):
+def comparison_home(request):
     try:
         eas = EquipArmorSlot.objects.order_by('current_equip_slot', 'character__char_class', '-armor__hp_points')
     except:
         eas = None
         if eas is not None:
-            return render(request, 'index.html', {'eas' : eas})
-    return render(request, 'index.html', {'eas' : eas})
+            return render(request, 'comparison_home.html', {'eas': eas})
+    return render(request, 'comparison_home.html', {'eas': eas})
 
-def search(request):
+def comparison_search(request):
     form = CharacterGearComparison(request.GET)
     if request.method == 'GET':
         if form.is_valid():
@@ -41,7 +41,7 @@ def search(request):
                 eas = eas.order_by('armor__hp_points')
             else:
                 eas = eas.order_by('armor__hp_points', 'character')
-            return render(request, 'comparison_search.html', {'form' : form, 'eas' : eas})
+            return render(request, 'comparison_search.html', {'form': form, 'eas': eas})
     else:
         form = CharacterGearComparison()
-    return render(request, 'comparison_view.html', {'form' : form})
+    return render(request, 'comparison_view.html', {'form': form})

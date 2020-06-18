@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+ROOT_DIR = os.path.dirname(__file__)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -25,15 +26,17 @@ SECRET_KEY = '&vd#pepf#4jdyvgspgwj)lobv-y-eg^wn505^r4*tn*c!vsbm-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.105', '67.11.153.52']
-
-
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.105',
+                 'char-website-dev.us-west-2.elasticbeanstalk.com',
+                 'peq-characters.eba-zyf5ahaz.us-west-2.elasticbeanstalk.com'
+                 ]
 # Application definition
 
 INSTALLED_APPS = [
-    'characters.apps.CharactersConfig',
-    'armor.apps.ArmorConfig',
+    'characters',
+    'armor',
     'epic_tracker',
+    'character_comparison',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,10 +58,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'char_website.urls'
 
+print(ROOT_DIR)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [(os.path.join(BASE_DIR, 'character_comparison', 'templates', 'character_comparison'))],
+        'DIRS': [(os.path.join(BASE_DIR, 'character_comparison', 'templates', 'character_comparison'),
+                  os.path.join(ROOT_DIR, 'templates'),
+                  os.path.join(BASE_DIR, 'characters', 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,7 +77,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'char_website.wsgi.application'
 
 
@@ -83,7 +89,7 @@ DATABASES = {
         'NAME': 'peq_characters',
         'USER': 'peq_characters',
         'PASSWORD': 'qwerty12',
-        'HOST': 'localhost',
+        'HOST': '192.168.0.105',
         'PORT': '',
     }
 }

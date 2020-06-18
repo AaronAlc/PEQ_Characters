@@ -13,7 +13,7 @@
         <th>Aug2</th>
         {% for e in eas %}
             <tr>
-                <td> <a href={% url 'detail' name=e.character %}> {{ e.character }} </a></td>
+                <td> <a href={% url 'character_detail' name=e.character %}> {{ e.character }} </a></td>
             <td> {{ e.character.char_class }} </td>
             <td> {{ e.armor }} </td>
             <td> {{ e.armor.hp_points }} </td>

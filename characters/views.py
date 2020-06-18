@@ -6,16 +6,16 @@ from armor.models import Armor, EquipArmorSlot, Augmentation
 from characters.scripts.updateArmor import getCharacterMagelo
 
 #Create your views here.
-def index(request):
+def character_home(request):
     character_list = Character.objects.all().order_by('aa_spent')
     context = {'character_list': character_list}
     if (request.method == ('POST')):
         for char in character_list:
             getCharacterMagelo(char.name)
         return HttpResponseRedirect('/characters/')
-    return render(request, 'characters/index.html', context)
+    return render(request, 'character_home.html', context)
 
-def detail(request, name):
+def character_detail(request, name):
     character = get_object_or_404(Character, name=name)
     try:
         eas = EquipArmorSlot.objects.filter(character=character)
@@ -27,9 +27,9 @@ def detail(request, name):
         for q in qs:
             if q.aug1.aug.name in missingAnguishAugs: 
                 missingAnguishAugs.remove(q.aug1.aug.name)
-        return render(request, 'characters/detail.html', {'character': character, 'eas' : eas, 'missingAnguishAugs' : missingAnguishAugs})
-    return render(request, 'characters/detail.html', {'character': character})
+        return render(request, 'character_detail.html', {'character': character, 'eas' : eas, 'missingAnguishAugs' : missingAnguishAugs})
+    return render(request, 'character_detail.html', {'character': character})
 
 def update_db(request):
-    return render_to_response(request, 'characters/index.html')
+    return render_to_response(request, 'character_home.html')
 
