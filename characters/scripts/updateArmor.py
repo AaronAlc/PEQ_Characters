@@ -1,10 +1,18 @@
 #/!/usr/bin/python
+import re
+import requests
+from urllib.request import urlopen
+
 from bs4 import BeautifulSoup
 from lxml import html
-from urllib.request import urlopen
+
+from armor.models import Armor
+from armor.models import Augmentation
+from armor.models import EquipArmorSlot
+from armor.models import EquipAugmentation1
+from armor.models import EquipAugmentation2
+from armor.models import WearableArmorSlot
 from characters.models import Character
-from armor.models import Armor, EquipArmorSlot, WearableArmorSlot, Augmentation, EquipAugmentation1, EquipAugmentation2
-import re, requests
 
 BASEURL = "http://www.projecteq.net/magelo/index.php?page=character&char="
 AAURL = "http://www.projecteq.net/magelo/index.php?page=aas&char="

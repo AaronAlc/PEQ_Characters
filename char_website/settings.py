@@ -25,8 +25,7 @@ SECRET_KEY = '&vd#pepf#4jdyvgspgwj)lobv-y-eg^wn505^r4*tn*c!vsbm-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.105', '67.11.153.52']
-
+ALLOWED_HOSTS = ['192.168.0.105', '67.11.153.52', '127.0.0.1']
 
 # Application definition
 
@@ -83,8 +82,8 @@ DATABASES = {
         'NAME': 'peq_characters',
         'USER': 'peq_characters',
         'PASSWORD': 'qwerty12',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '192.168.0.105',
+        'PORT': '3306',
     }
 }
 
@@ -121,6 +120,27 @@ USE_L10N = True
 
 USE_TZ = True
 
+#Logging Settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
