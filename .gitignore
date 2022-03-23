@@ -3,6 +3,7 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-char_website/settings.py
+/char_website/settings.py
 .idea/*
 .ebextensions/*
+**/__pycache__/**

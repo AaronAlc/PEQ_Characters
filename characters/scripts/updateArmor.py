@@ -202,6 +202,7 @@ def getCharacterMagelo(character):
     
 
     try :
+        #need to add a check for more than 1
         character = Character.objects.get(name=character)
         if "Error" not in title:
             print("Updating %s" %(character))

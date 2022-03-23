@@ -40,24 +40,38 @@ class Augmentation(ItemAttributes):
         "Kyv Eye of Marksmanship",
     ]
 
+    class Meta:
+        db_table = "Augmentation"
+
     def __str__(self):
         return self.name
 
 class EquipAugmentation1(models.Model):
     equip_aug_slot1 = models.AutoField(primary_key=True)
     aug = models.ForeignKey(Augmentation, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.aug.name
+
+    class Meta:
+        db_table = "Equip_Augmentation_Slot1"
 
 class EquipAugmentation2(models.Model):
     equip_aug_slot2 = models.AutoField(primary_key=True)
     aug = models.ForeignKey(Augmentation, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "Equip_Augmentation_Slot2"
+
     def __str__(self):
         return self.aug.name
 
-
 class Armor(ItemAttributes):
     armor_id=models.AutoField(primary_key=True)
+
+    class Meta:
+        db_table = "Armor"
+        verbose_name_plural = 'Armor'
 
     def __str__(self):
         return self.name
@@ -95,6 +109,8 @@ class EquipArmorSlot(models.Model):
     aug1 = models.ForeignKey(EquipAugmentation1, on_delete=models.CASCADE, default=None, null=True)
     aug2 = models.ForeignKey(EquipAugmentation2, on_delete=models.CASCADE, default=None, null=True)
 
+    class Meta:
+        db_table = 'Equip_Armor_Slot'
     def slot_verbose(self):
         return dict(EquipArmorSlot.EQUIP_SLOTS)[self.current_equip_slot]
 
@@ -123,3 +139,7 @@ class WearableArmorSlot(models.Model):
     )
     armor = models.ForeignKey('armor.Armor', null=True, blank=True, on_delete=models.CASCADE, default=None)
     wearable_armor_slot = models.CharField(max_length=15, choices=WEARABLE_SLOTS, default=None, blank=True)
+
+    class Meta:
+        db_table = 'Wearable_Armor_Slot'
+

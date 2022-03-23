@@ -3,31 +3,32 @@
 {% block content %}
 
 {% if eas %}
-    <h1>Armor List by CHARACTERS</h1>
-    <li><a class='Search' href="{% url 'character_comparison:comparison_search' %}">Search</a></li>
-    <table border="1">
-        <tr>
-            <th>Character Name</th>
-            <th>Class</th>
-            <th>Armor Name</th>
-            <th>HP</th>
-            <th>Mana</th>
-            <th>Equip Slot</th>
-            <th>Aug1</th>
-            <th>Aug2</th>
-            {% for e in eas %}
-                <tr>
-                <td> <a href={% url 'character_detail' name=e.character %}> {{ e.character }} </a></td>
-                <td> {{ e.character.char_class }} </td>
-                <td> {{ e.armor }} </td>
-                <td> {{ e.armor.hp_points }} </td>
-                <td>{{ e.armor.mana_points }} </td>
-                <td>{{ e.slot_verbose }} </td>
-                <td>{{ e.aug1 }} </td>
-                <td>{{ e.aug2 }} </td>
-                </tr>
-            {% endfor %}
-    </table>
+<h1>Armor List by CHARACTERS</h1>
+<li><a class='Search' href="{% url 'character_comparison:comparison_search' %}">Search</a></li>
+<table border="1">
+    <tr>
+        <th>Character Name</th>
+        <th>Class</th>
+        <th>Armor Name</th>
+        <th>HP</th>
+        <th>Mana</th>
+        <th>Equip Slot</th>
+        <th>Aug1</th>
+        <th>Aug2</th>
+    </tr>
+    {% for e in eas %}
+    <tr>
+        <td><a href={% url 'character_detail' name=e.character %}> {{ e.character }} </a></td>
+        <td> {{ e.character.char_class }}</td>
+        <td> {{ e.armor }}</td>
+        <td> {{ e.armor.hp_points }}</td>
+        <td>{{ e.armor.mana_points }}</td>
+        <td>{{ e.slot_verbose }}</td>
+        <td>{{ e.aug1 }}</td>
+        <td>{{ e.aug2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endif %}
 
 {% endblock %}

@@ -1,27 +1,44 @@
 {% extends 'comparison_view.html' %}
 
 {% block character_detail %}
-    <h1>Armor List by CLASS/SLOT</h1>
-    <table border="1">
-        <th>Character Name</th>
-        <th>Class</th>
-        <th>Armor Name</th>
-        <th>HP</th>
-        <th>Mana</th>
-        <th>Equip Slot</th>
-        <th>Aug1</th>
-        <th>Aug2</th>
-        {% for e in eas %}
-            <tr>
-                <td> <a href={% url 'character_detail' name=e.character %}> {{ e.character }} </a></td>
-            <td> {{ e.character.char_class }} </td>
-            <td> {{ e.armor }} </td>
-            <td> {{ e.armor.hp_points }} </td>
-            <td> {{ e.armor.mana_points }} </td>
-            <td> {{ e.slot_verbose }} </td>
-            <td> {{ e.aug1 }} </td>
-            <td> {{ e.aug2 }} </td>
-            </tr>
-        {% endfor %}
-    </table>
+<h1>Armor List by CLASS/SLOT</h1>
+<h2>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</h2>
+<div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <a href="?page=1">First</a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </span>
+</div>
+<table border="1">
+    <th>Character Name</th>
+    <th>Class</th>
+    <th>Armor Name</th>
+    <th>HP</th>
+    <th>Mana</th>
+    <th>Equip Slot</th>
+    <th>Aug1</th>
+    <th>Aug2</th>
+    {% for e in page_obj %}
+    <tr>
+        <td><a href={% url 'character_detail' name=e.character %}> {{ e.character }} </a></td>
+        <td> {{ e.character.char_class }}</td>
+        <td> {{ e.armor }}</td>
+        <td> {{ e.armor.hp_points }}</td>
+        <td> {{ e.armor.mana_points }}</td>
+        <td> {{ e.slot_verbose }}</td>
+        <td> {{ e.aug1 }}</td>
+        <td> {{ e.aug2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}

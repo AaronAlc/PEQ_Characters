@@ -1,11 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello world</title>
-</head>
-<body>
-hi
+{% extends 'header_footer.html' %}
+{% block content %}
+<h1>Epic Status by CHARACTER</h1>
+<li><a class='Search' href="{% url 'epic_tracker:epic_dashboard' %}">Search</a></li>
 
-</body>
-</html>
+<table border="1">
+    <tr>
+        <th>Character Name</th>
+        <th>Epic 1.0</th>
+        <th>Epic 1.5 Pre Quest</th>
+        <th>Epic 1.5</th>
+        <th>Epic 2.0</th>
+        <th>Details</th>
+    </tr>
+        {% for epic in epicList %}
+        <tr>
+            <td> <a href={% url 'character_detail' name=epic.character %}> {{ epic.character }} </a></td>
+            <td> {{ epic.epic_1_0_complete }}</td>
+            <td> {{ epic.epic_1_5_pre_complete }}</td>
+            <td> {{ epic.epic_1_5_complete }}</td>
+            <td> {{ epic.epic_2_0_complete }}</td>
+            <td> Placeholder </td>
+        </tr>
+        {% endfor %}
+</table>
+
+{% endblock %}
