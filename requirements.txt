@@ -23,7 +23,7 @@ idna==2.7
 importlib-metadata==1.6.1
 jmespath==0.10.0
 jsonschema==3.2.0
-lxml==4.7.1
+lxml==4.9.1
 #mysqlclient==2.1.0
 pymysql
 paramiko==2.7.1
